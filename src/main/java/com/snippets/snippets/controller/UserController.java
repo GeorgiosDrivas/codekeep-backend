@@ -1,5 +1,6 @@
 package com.snippets.snippets.controller;
 
+import com.snippets.snippets.model.Snippet;
 import com.snippets.snippets.model.User;
 import com.snippets.snippets.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ResponseEntity<String> createUser(@RequestBody User user){ // It returns String for some reason. Maybe should return nothing
+    public ResponseEntity<String> createUser(@RequestBody User user){
         user = userService.createUser(user);
         return new ResponseEntity<>("User is created successfully with id: " + user.getId(), HttpStatus.CREATED);
     }
@@ -61,4 +62,13 @@ public class UserController {
         }
     }
 
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        try {
+            User user = userService.updateUser(id, updatedUser);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
