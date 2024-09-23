@@ -46,8 +46,8 @@ public class UserService {
             User existingUser = userOptional.get();
 
             existingUser.setName(updatedUser.getName());
-            existingUser.setUsername(updatedUser.getUsername());
-            existingUser.setPassword(updatedUser.getPassword());
+            // existingUser.setUsername(updatedUser.getUsername());
+            // existingUser.setPassword(updatedUser.getPassword());
 
             return userRepository.save(existingUser);
         } else {
