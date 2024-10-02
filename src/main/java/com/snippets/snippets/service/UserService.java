@@ -1,11 +1,9 @@
 package com.snippets.snippets.service;
 
-import com.snippets.snippets.model.Snippet;
 import com.snippets.snippets.model.User;
 import com.snippets.snippets.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,12 +44,13 @@ public class UserService {
             User existingUser = userOptional.get();
 
             existingUser.setName(updatedUser.getName());
-            // existingUser.setUsername(updatedUser.getUsername());
-            // existingUser.setPassword(updatedUser.getPassword());
+            existingUser.setUsername(updatedUser.getUsername());
+            existingUser.setPassword(updatedUser.getPassword());
 
             return userRepository.save(existingUser);
         } else {
             throw new Exception("User not found");
         }
     }
+
 }
