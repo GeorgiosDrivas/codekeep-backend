@@ -1,14 +1,11 @@
 package com.snippets.snippets.controller;
 
-import com.snippets.snippets.model.Snippet;
 import com.snippets.snippets.model.User;
 import com.snippets.snippets.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class UserController {
@@ -71,4 +68,5 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }
