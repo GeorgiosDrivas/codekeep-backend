@@ -13,13 +13,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/add-user", method = RequestMethod.POST)
     public ResponseEntity<String> createUser(@RequestBody User user){
         user = userService.createUser(user);
         return new ResponseEntity<>("User is created successfully with id: " + user.getId(), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/get-user/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) throws Exception {
         boolean isUserExist = userService.isUserExist(id);
         if (isUserExist)
@@ -34,7 +34,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteUser(@PathVariable("id") Long id) throws Exception {
         boolean isUserExist = userService.isUserExist(id);
         if (isUserExist)
@@ -59,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/users/update/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         try {
             User user = userService.updateUser(id, updatedUser);

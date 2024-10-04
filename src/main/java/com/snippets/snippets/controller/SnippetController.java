@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// Maybe find a better endpoint naming
 
 @RestController
 public class SnippetController {
@@ -24,13 +23,13 @@ public class SnippetController {
         return snippetService.getSnippets(userid);
     }
 
-    @RequestMapping(value = "/addSnippet", method = RequestMethod.POST)
+    @RequestMapping(value = "/snippets/add-snippet", method = RequestMethod.POST)
     public ResponseEntity<Snippet> createSnippet(@RequestBody Snippet snippet){
         Snippet createdSnippet = snippetService.createSnippet(snippet);
         return new ResponseEntity<>(createdSnippet, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/snippets/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/snippets/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteSnippet(@PathVariable("id") Long id) throws Exception {
         boolean snippetExist = snippetService.snippetExist(id);
         if (snippetExist)
@@ -45,7 +44,7 @@ public class SnippetController {
         }
     }
 
-    @PutMapping("/snippets/{id}")
+    @PutMapping("/snippets/update/{id}")
     public ResponseEntity<Snippet> updateSnippet(@PathVariable Long id, @RequestBody Snippet updatedSnippet) {
         try {
             Snippet snippet = snippetService.updateSnippet(id, updatedSnippet);
